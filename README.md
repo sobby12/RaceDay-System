@@ -93,7 +93,7 @@ A workflow will check that the required `/docs` folder and project files are pre
 
 ### Successful Build
 
-The successful GitHub Actions build screenshot will be added here after the CI/CD workflow has been configured.
+
 
 ![Successful GitHub Actions Build](docs/github-actions-success.png)
 

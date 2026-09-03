@@ -1,0 +1,31 @@
+name: Validate RaceDay Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f docs/RaceDay_Database_Final.sql
+          test -f docs/RaceDay.docx
+          test -f docs/RaceDay_ERD.drawio.png
+
+      - name: Validate SQL script
+        run: |
+          test -s docs/RaceDay_Database_Final.sql
+
+      - name: Validation successful
+        run: echo "RaceDay project validation completed successfully."

@@ -124,7 +124,16 @@ The repository is organised to keep the project documentation and validation wor
 - `/docs` — Contains the ERD, API endpoint plan, SQL database script and GitHub Actions evidence.
 - `/.github/workflows` — Contains the GitHub Actions validation workflow.
 - `README.md` — Provides an overview of the RaceDay System, user roles, API, database and project documentation.
-  
+
+  ## Security Considerations
+
+The RaceDay System separates access between the Organizer and Participant roles.
+
+- Organizers are responsible for managing events, categories and participant results.
+- Participants can manage their own enrolments and view their own results.
+- The API endpoint plan identifies which role is permitted to access each operation.
+- User email addresses are unique in the database to help prevent duplicate accounts.
+
 ## Testing
 
 The SQL database script includes verification queries that can be executed in SQL Server Management Studio (SSMS).

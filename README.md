@@ -101,4 +101,4 @@ A workflow will check that the required `/docs` folder and project files are pre
 
 An unlisted YouTube video will be provided showing the planning documents, ERD decisions, endpoint plan and SQL script being executed in SQL Server Management Studio.
 
-[Watch the RaceDay System project walkthrough on YouTube](YOUTUBE_LINK_GOES_HERE)
+[Watch the RaceDay System project walkthrough on YouTube](https://youtu.be/IO0UysTTx9Q)

@@ -117,6 +117,19 @@ The RaceDay System Part 1 planning and database work uses the following technolo
 - **GitHub Actions** — Used to validate the required project structure and files.
 - **draw.io** — Used to create the Entity Relationship Diagram.
 
+## Testing
+
+The SQL database script includes verification queries that can be executed in SQL Server Management Studio (SSMS).
+
+These queries are used to confirm that:
+
+- The required tables were created successfully.
+- Sample roles and users were inserted.
+- Events and categories were inserted correctly.
+- Event enrolments were created correctly.
+- Participant results were inserted correctly.
+- The relationships between the database tables are working as expected.
+
 ## Project Documentation
 
 The planning documents are available in the `/docs` folder:

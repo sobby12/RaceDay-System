@@ -147,6 +147,12 @@ These queries are used to confirm that:
 - Participant results were inserted correctly.
 - The relationships between the database tables are working as expected.
 
+## Future Development
+
+The planning completed in Part 1 provides the foundation for the next stage of the RaceDay System.
+
+Future development can include implementing the planned API endpoints, connecting the API to the RaceDayDB database, implementing authentication and role-based authorization, and building the functionality for event enrolments and race results.
+
 ## Project Documentation
 
 The planning documents are available in the `/docs` folder:

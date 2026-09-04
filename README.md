@@ -107,6 +107,16 @@ The database uses constraints to help keep the data valid and consistent.
 - Check constraints validate values such as event type, distance, entry fee, participant limits and result status.
 - A unique constraint prevents a participant from registering for the same event more than once.
 
+## Technologies
+
+The RaceDay System Part 1 planning and database work uses the following technologies:
+
+- **Microsoft SQL Server** — Database management system used for RaceDayDB.
+- **SQL Server Management Studio (SSMS)** — Used to execute and verify the SQL database script.
+- **GitHub** — Used for source control and project documentation.
+- **GitHub Actions** — Used to validate the required project structure and files.
+- **draw.io** — Used to create the Entity Relationship Diagram.
+
 ## Project Documentation
 
 The planning documents are available in the `/docs` folder:

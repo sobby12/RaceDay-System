@@ -17,6 +17,18 @@ The database is implemented using Microsoft SQL Server and is called `RaceDayDB`
 
 The SQL database includes primary keys, foreign keys, unique constraints and check constraints to maintain data integrity. It also contains sample data and verification queries for testing the database in SQL Server Management Studio (SSMS).
 
+## Database Design
+
+The database is designed to support the main relationships in the RaceDay System.
+
+- Roles are assigned to users.
+- Organizers can manage multiple events.
+- Events can contain multiple race categories.
+- Participants can enrol in events and select a category.
+- Each enrolment can have one race result.
+- Foreign keys are used to maintain relationships between the tables.
+- Unique and check constraints are used to help maintain valid data.
+  
 ## User Roles
 
 ### Organizer

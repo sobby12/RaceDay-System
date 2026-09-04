@@ -97,6 +97,16 @@ The SQL script:
 4. Inserts sample roles, users, events, categories, enrolments and results.
 5. Provides verification queries for testing the database in SSMS.
 
+### Data Integrity
+
+The database uses constraints to help keep the data valid and consistent.
+
+- Primary keys uniquely identify records.
+- Foreign keys maintain relationships between related tables.
+- Unique constraints prevent duplicate role names, user emails and category names within an event.
+- Check constraints validate values such as event type, distance, entry fee, participant limits and result status.
+- A unique constraint prevents a participant from registering for the same event more than once.
+
 ## Project Documentation
 
 The planning documents are available in the `/docs` folder:

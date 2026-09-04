@@ -117,6 +117,14 @@ The RaceDay System Part 1 planning and database work uses the following technolo
 - **GitHub Actions** — Used to validate the required project structure and files.
 - **draw.io** — Used to create the Entity Relationship Diagram.
 
+## Project Structure
+
+The repository is organised to keep the project documentation and validation workflow easy to locate.
+
+- `/docs` — Contains the ERD, API endpoint plan, SQL database script and GitHub Actions evidence.
+- `/.github/workflows` — Contains the GitHub Actions validation workflow.
+- `README.md` — Provides an overview of the RaceDay System, user roles, API, database and project documentation.
+  
 ## Testing
 
 The SQL database script includes verification queries that can be executed in SQL Server Management Studio (SSMS).

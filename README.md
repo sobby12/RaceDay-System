@@ -77,6 +77,14 @@ Examples include:
 
 The complete endpoint plan is available in the `/docs` folder.
 
+### API Role Permissions
+
+The API uses role-based access to separate Organizer and Participant actions.
+
+- **Organizer:** Can create, update and delete events and categories, view event enrolments, and record or update participant results.
+- **Participant:** Can view events and categories, enrol in events, manage their own enrolments, and view their own results.
+- **Both roles:** Can register, log in and manage their own user profile.
+
 ## Database
 
 The RaceDay database is implemented using Microsoft SQL Server.

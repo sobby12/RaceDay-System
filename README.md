@@ -114,6 +114,13 @@ The planning documents are available in the `/docs` folder:
 - [ERD](docs/RaceDay_ERD.drawio.png)
 - [Endpoint Plan](docs/RaceDay.docx)
 - [SQL Database Script](docs/RaceDay_Database_Final.sql)
+  
+### Documentation Purpose
+
+- **ERD:** Shows the database entities and their relationships.
+- **Endpoint Plan:** Defines the API operations and which role can access each operation.
+- **SQL Database Script:** Creates the database structure, inserts sample data and provides verification queries for SSMS.
+- **GitHub Actions Screenshot:** Provides evidence that the repository validation workflow completed successfully.
 
 ## CI/CD
 

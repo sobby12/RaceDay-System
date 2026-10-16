@@ -116,6 +116,12 @@ GitHub Actions is used for automated validation. The RaceDay API CI workflow is 
 
 A successful workflow run provides evidence that the configured build process completed successfully. The result can be viewed under the repository's **Actions** tab.
 
+### Successful GitHub Actions Workflow
+
+The screenshot below provides evidence of the GitHub Actions workflow completing successfully.
+
+![Successful GitHub Actions workflow](docs/github-actions-success.png)
+
 ## 9. Project Structure
 
 - `RaceDay.API/` — ASP.NET Core API, controllers, models, data access and configuration.

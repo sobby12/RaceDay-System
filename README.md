@@ -1,12 +1,29 @@
-# RaceDay-System
+# RaceDay System — RESTful API Development
 
-## System Description
+## 1. Project Overview
 
-RaceDay System is a race and event management system designed to support the management of running, walking and cycling events.
+RaceDay System is a race and event management system designed to support running, walking and cycling events. The project includes database design and a RESTful API developed using ASP.NET Core.
 
-The system allows users to register and log in, manage their profiles, view available events and view event details. Participants can enrol in events by selecting a category, manage their enrolments and view their own race results. Organizers can create, update and delete events and categories, view event enrolments, and record and update participant results.
+The API supports user registration and login, event management, race categories, participant enrolments and race results. Authentication and role-based authorization help protect operations that require permission.
 
-The database is implemented using Microsoft SQL Server and is called `RaceDayDB`. The database contains six main entities:
+## 2. Technologies Used
+
+- C# and ASP.NET Core Web API
+- .NET 10
+- Microsoft SQL Server
+- Entity Framework Core
+- JWT (JSON Web Token) authentication
+- Swagger / OpenAPI
+- xUnit for automated unit testing
+- Git and GitHub for source control
+- GitHub Actions for continuous integration
+- Visual Studio for development
+
+## 3. Database
+
+The database is named `RaceDayDB` and uses Microsoft SQL Server. The application connects through the connection string configured in `appsettings.json`.
+
+The main database entities are:
 
 - Roles
 - Users
@@ -15,173 +32,120 @@ The database is implemented using Microsoft SQL Server and is called `RaceDayDB`
 - EventEnrollments
 - Results
 
-The SQL database includes primary keys, foreign keys, unique constraints and check constraints to maintain data integrity. It also contains sample data and verification queries for testing the database in SQL Server Management Studio (SSMS).
+Primary keys, foreign keys, unique constraints and check constraints help maintain data integrity.
 
-## Database Design
+### Database Setup
 
-The database is designed to support the main relationships in the RaceDay System.
+1. Install SQL Server and SQL Server Management Studio (SSMS).
+2. Execute the database script provided in the `docs` folder, if setting up a fresh database.
+3. Configure the SQL Server connection string for the local environment.
+4. Open the solution in Visual Studio.
+5. Restore the NuGet packages and build the solution.
+6. Run the API and open Swagger to test the endpoints.
 
-- Roles are assigned to users.
-- Organizers can manage multiple events.
-- Events can contain multiple race categories.
-- Participants can enrol in events and select a category.
-- Each enrolment can have one race result.
-- Foreign keys are used to maintain relationships between the tables.
-- Unique and check constraints are used to help maintain valid data.
-  
-## User Roles
+Do not execute a database-creation script over an existing database without first checking its contents.
 
-### Organizer
+## 4. Authentication and Authorization
 
-The Organizer is responsible for managing race events and their categories. An Organizer can:
+The API provides registration and login endpoints.
 
-- Create new events
-- Update existing events
-- Delete events
-- Create event categories
-- Update event categories
-- Delete event categories
-- View participants enrolled in an event
-- Record participant results
-- Update existing results
+- `POST /api/Auth/register` — Register a participant account.
+- `POST /api/Auth/login` — Authenticate a user and receive a JWT.
 
-The Organizer is also able to register, log in and manage their own user profile.
+Passwords are hashed using ASP.NET Core's `PasswordHasher`. After successful login, the API generates a token containing the user's identity and role.
 
-### Participant
+Protected endpoints use JWT bearer authentication. Role-based authorization restricts operations according to the permissions implemented in the controllers.
 
-The Participant is a user who takes part in race events. A Participant can:
+Participants can access their own enrolments and results. Administrative roles are required for protected management operations, including viewing all enrolments and recording or managing results.
 
-- Register and log in
-- View and update their own profile
-- View available events
-- View event details
-- View event categories
-- Enrol in an event by selecting a category
-- View their own event enrolments
-- Cancel an enrolment
-- View their own race results
+For local development, configure the JWT signing key securely. Do not use development keys or local credentials in a production deployment.
 
-## API
+## 5. API Endpoints
 
-The API endpoint plan defines endpoints for authentication, user profiles, events, categories, enrolments and results.
+The following are examples of implemented API operations. Open Swagger to view the available routes and request requirements.
 
-Examples include:
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/Auth/register` | Register a user |
+| POST | `/api/Auth/login` | Log in and obtain a token |
+| GET | `/api/Events` | View events |
+| POST | `/api/Events` | Create an event |
+| PUT | `/api/Events/{id}` | Update an event |
+| DELETE | `/api/Events/{id}` | Delete an event |
+| GET | `/api/Categories` | View categories |
+| POST | `/api/Categories` | Create a category |
+| GET | `/api/Enrolments/Me` | View the logged-in participant's enrolments |
+| POST | `/api/Events/{eventId}/Enrolments` | Enrol in an event |
+| DELETE | `/api/Enrolments/{id}` | Cancel an enrolment |
+| GET | `/api/Results/Me` | View the logged-in participant's results |
+| POST | `/api/Enrolments/{enrolmentId}/Result` | Record a result |
 
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Log in a registered user
-- `GET /api/events` - View available events
-- `POST /api/events` - Create an event
-- `GET /api/events/{id}` - View a specific event
-- `POST /api/events/{eventId}/enrolments` - Enrol in an event
-- `GET /api/results/me` - View the logged-in participant's results
+The exact route names, supported HTTP methods and authorization requirements should be verified in the controllers and Swagger documentation.
 
-The complete endpoint plan is available in the `/docs` folder.
+## 6. Running the Application
 
-### API Role Permissions
+1. Open `RaceDay.slnx` in Visual Studio.
+2. Confirm that the connection string and JWT settings are configured for your development environment.
+3. Restore the NuGet packages.
+4. Build the solution.
+5. Run `RaceDay.API`.
+6. Open the Swagger interface at the HTTPS address displayed in the Visual Studio output, followed by `/swagger`.
 
-The API uses role-based access to separate Organizer and Participant actions.
+For example, the local development address may be `https://localhost:7258/swagger`. The port can differ between environments.
 
-- **Organizer:** Can create, update and delete events and categories, view event enrolments, and record or update participant results.
-- **Participant:** Can view events and categories, enrol in events, manage their own enrolments, and view their own results.
-- **Both roles:** Can register, log in and manage their own user profile.
+To test protected endpoints, register or log in, copy the returned JWT, select **Authorize** in Swagger and enter the token using the expected bearer-token format.
 
-## Database
+## 7. Testing
 
-The RaceDay database is implemented using Microsoft SQL Server.
+The `RaceDay.API.Tests` project contains automated xUnit tests.
 
-The SQL script:
+The current tests check basic category-name validation:
 
-1. Creates the `RaceDayDB` database.
-2. Creates the six database tables.
-3. Defines primary keys, foreign keys and constraints.
-4. Inserts sample roles, users, events, categories, enrolments and results.
-5. Provides verification queries for testing the database in SSMS.
+- A non-empty category name is considered valid.
+- An empty category name is considered invalid.
 
-### Data Integrity
+The tests were run in Visual Studio, and both passed. The complete solution also built successfully.
 
-The database uses constraints to help keep the data valid and consistent.
+These tests provide an initial automated test suite. Additional tests for authentication, authorization, API responses and database operations would improve test coverage.
 
-- Primary keys uniquely identify records.
-- Foreign keys maintain relationships between related tables.
-- Unique constraints prevent duplicate role names, user emails and category names within an event.
-- Check constraints validate values such as event type, distance, entry fee, participant limits and result status.
-- A unique constraint prevents a participant from registering for the same event more than once.
+## 8. GitHub Actions and CI/CD
 
-## Technologies
+The project is stored in the RaceDay-System GitHub repository.
 
-The RaceDay System Part 1 planning and database work uses the following technologies:
+GitHub Actions is used for automated validation. The RaceDay API CI workflow is configured to restore dependencies and build the solution when changes are pushed to the main branch or when a pull request targets that branch.
 
-- **Microsoft SQL Server** — Database management system used for RaceDayDB.
-- **SQL Server Management Studio (SSMS)** — Used to execute and verify the SQL database script.
-- **GitHub** — Used for source control and project documentation.
-- **GitHub Actions** — Used to validate the required project structure and files.
-- **draw.io** — Used to create the Entity Relationship Diagram.
+A successful workflow run provides evidence that the configured build process completed successfully. The result can be viewed under the repository's **Actions** tab.
 
-## Project Structure
+## 9. Project Structure
 
-The repository is organised to keep the project documentation and validation workflow easy to locate.
+- `RaceDay.API/` — ASP.NET Core API, controllers, models, data access and configuration.
+- `RaceDay.API.Tests/` — Automated unit tests.
+- `docs/` — Part 1 documentation, including the ERD, endpoint plan and SQL script.
+- `.github/workflows/` — GitHub Actions workflow files.
+- `RaceDay.slnx` — Visual Studio solution file.
+- `README.md` — Project overview and setup instructions.
 
-- `/docs` — Contains the ERD, API endpoint plan, SQL database script and GitHub Actions evidence.
-- `/.github/workflows` — Contains the GitHub Actions validation workflow.
-- `README.md` — Provides an overview of the RaceDay System, user roles, API, database and project documentation.
+## 10. Part 1 Documentation
 
-  ## Security Considerations
+The repository contains the planning and database documentation developed in Part 1:
 
-The RaceDay System separates access between the Organizer and Participant roles.
+- **ERD:** `docs/RaceDay_ERD.drawio.png`
+- **Endpoint plan:** `docs/RaceDay.docx`
+- **SQL database script:** `docs/RaceDay_Database_Final.sql`
 
-- Organizers are responsible for managing events, categories and participant results.
-- Participants can manage their own enrolments and view their own results.
-- The API endpoint plan identifies which role is permitted to access each operation.
-- User email addresses are unique in the database to help prevent duplicate accounts.
+These documents describe the database structure, planned API operations and SQL implementation.
 
-## Testing
+## 11. Future Improvements
 
-The SQL database script includes verification queries that can be executed in SQL Server Management Studio (SSMS).
+Possible improvements include increasing automated test coverage, adding integration tests, improving error handling, introducing production-ready secret management, and expanding API documentation.
 
-These queries are used to confirm that:
+## 12. Project Demonstration
 
-- The required tables were created successfully.
-- Sample roles and users were inserted.
-- Events and categories were inserted correctly.
-- Event enrolments were created correctly.
-- Participant results were inserted correctly.
-- The relationships between the database tables are working as expected.
+The project demonstration should show the running API, Swagger endpoints, authentication, role-based access, enrolment and result operations, automated test results, and the successful GitHub Actions run.
 
-## Future Development
+The existing Part 1 walkthrough is available here:
 
-The planning completed in Part 1 provides the foundation for the next stage of the RaceDay System.
+[Watch the RaceDay System Part 1 walkthrough](https://youtu.be/IO0UysTTx9Q)
 
-Future development can include implementing the planned API endpoints, connecting the API to the RaceDayDB database, implementing authentication and role-based authorization, and building the functionality for event enrolments and race results.
+A separate Part 2 demonstration should be added if required by the assessment rubric.
 
-## Project Documentation
-
-The planning documents are available in the `/docs` folder:
-
-- [ERD](docs/RaceDay_ERD.drawio.png)
-- [Endpoint Plan](docs/RaceDay.docx)
-- [SQL Database Script](docs/RaceDay_Database_Final.sql)
-  
-### Documentation Purpose
-
-- **ERD:** Shows the database entities and their relationships.
-- **Endpoint Plan:** Defines the API operations and which role can access each operation.
-- **SQL Database Script:** Creates the database structure, inserts sample data and provides verification queries for SSMS.
-- **GitHub Actions Screenshot:** Provides evidence that the repository validation workflow completed successfully.
-
-## CI/CD
-
-GitHub Actions is used to validate the required repository structure and documentation.
-
-A workflow will check that the required `/docs` folder and project files are present.
-
-### Successful Build
-
-
-
-![Successful GitHub Actions Build](docs/github-actions-success.png)
-
-## Project Video
-
-An unlisted YouTube video will be provided showing the planning documents, ERD decisions, endpoint plan and SQL script being executed in SQL Server Management Studio.
-
-[Watch the RaceDay System project walkthrough on YouTube](https://youtu.be/IO0UysTTx9Q)

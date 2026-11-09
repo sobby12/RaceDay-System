@@ -1,0 +1,73 @@
+﻿```cshtml
+@model RaceDay.MVC.Models.EventViewModel
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">@Model.EventName</h3>
+        </div>
+
+        <div class="card-body">
+
+            <h5 class="mb-3">Event Information</h5>
+
+            <p>
+                <strong>Description:</strong>
+                @(string.IsNullOrWhiteSpace(Model.Description)
+                    ? "No description available."
+                    : Model.Description)
+            </p>
+
+            <p>
+                <strong>Event Date:</strong>
+                @Model.EventDate.ToString("dd MMMM yyyy")
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                @Model.Location
+            </p>
+
+            <p>
+                <strong>Distance:</strong>
+                @Model.DistanceKm km
+            </p>
+
+            <p>
+                <strong>Event Type:</strong>
+                @Model.EventType
+            </p>
+
+            <p>
+                <strong>Entry Fee:</strong>
+                R @Model.EntryFee.ToString("F2")
+            </p>
+
+            <p>
+                <strong>Maximum Participants:</strong>
+                @Model.MaxParticipants
+            </p>
+
+            <hr />
+
+            <a asp-controller="Enrolments"
+   asp-action="Create"
+   asp-route-eventId="@Model.EventId"
+   class="btn btn-success">
+    Enrol Now
+</a>
+
+<a asp-controller="Events"
+   asp-action="Index"
+   class="btn btn-secondary">
+    Back to Events
+</a>
+
+        </div>
+    </div>
+</div>
+```

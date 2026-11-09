@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "RaceDay Dashboard";
+    bool isLoggedIn = Context.Session.GetString("JWToken") != null;
+}
+
+<div class="container mt-5">
+
+    @if (isLoggedIn)
+    {
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Participant Dashboard</h1>
+
+            <p class="lead">
+                Welcome to RaceDay. Find events and manage your participation.
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <!-- Browse Events Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body p-4">
+
+                        <h3>Browse Events</h3>
+
+                        <p class="mt-3">
+                            Explore available RaceDay events and find an event to join.
+                        </p>
+
+                        <a asp-controller="Events"
+                           asp-action="Index"
+                           class="btn btn-primary mt-2">
+                            Browse Events
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Enrolments Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body p-4">
+
+                        <h3>My Enrolments</h3>
+
+                        <p class="mt-3">
+                            View and manage your event enrolments.
+                        </p>
+
+                        <a asp-controller="Enrolments"
+                           asp-action="MyEnrolments"
+                           class="btn btn-primary mt-2">
+                            My Enrolments
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="text-center mb-5">
+
+            <h1 class="display-4 fw-bold">Welcome to RaceDay</h1>
+
+            <p class="lead">
+                Your platform for managing race events.
+            </p>
+
+            <hr />
+
+            <p>
+                Please log in to browse events and manage your enrolments.
+            </p>
+
+            <a asp-controller="Account"
+               asp-action="Login"
+               class="btn btn-primary">
+                Login
+            </a>
+
+        </div>
+    }
+
+</div>

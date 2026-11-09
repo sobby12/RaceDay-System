@@ -1,0 +1,69 @@
+﻿```cshtml
+@model IEnumerable<RaceDay.MVC.Controllers.MyEnrolmentViewModel>
+
+@{
+    ViewData["Title"] = "Manage Enrolments";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Manage Enrolments</h1>
+    <p class="text-muted">View participants enrolled in RaceDay events.</p>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No enrolments are currently available.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Enrolment ID</th>
+                        <th>Event ID</th>
+                        <th>Participant ID</th>
+                        <th>Category ID</th>
+                        <th>Enrolment Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enrolment in Model)
+                    {
+                        <tr>
+                            <td>@enrolment.EnrollmentId</td>
+                            <td>@enrolment.EventId</td>
+                            <td>@enrolment.UserId</td>
+                            <td>@enrolment.CategoryId</td>
+                            <td>@enrolment.EnrollmentDate.ToString("dd/MM/yyyy")</td>
+                            <td>@enrolment.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="OrganizerDashboard"
+       class="btn btn-secondary mt-3">
+        Back to Dashboard
+    </a>
+</div>
+```

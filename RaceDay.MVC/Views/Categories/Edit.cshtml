@@ -1,0 +1,55 @@
+﻿
+@model RaceDay.MVC.Models.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div class="container mt-4">
+    <h1>Edit Category</h1>
+
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="CategoryId" />
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="EventId" class="form-label">Event ID</label>
+            <input asp-for="EventId" type="number" min="1" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryName" class="form-label">Category Name</label>
+            <input asp-for="CategoryName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryType" class="form-label">Category Type</label>
+            <select asp-for="CategoryType" class="form-select">
+                <option value="Distance">Distance</option>
+                <option value="Age">Age</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MinAge" class="form-label">Minimum Age</label>
+            <input asp-for="MinAge" type="number" min="0" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MaxAge" class="form-label">Maximum Age</label>
+            <input asp-for="MaxAge" type="number" min="0" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryDistanceKm" class="form-label">Distance in KM</label>
+            <input asp-for="CategoryDistanceKm" type="number" min="0.01" step="0.01" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Category</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+

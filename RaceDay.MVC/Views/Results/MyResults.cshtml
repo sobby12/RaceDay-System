@@ -1,0 +1,71 @@
+﻿
+@model List<RaceDay.MVC.Controllers.MyResultViewModel>
+
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">My Results</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No race results are available yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Result ID</th>
+                        <th>Enrolment ID</th>
+                        <th>Finish Time</th>
+                        <th>Position</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in Model)
+                    {
+                        <tr>
+                            <td>@result.ResultId</td>
+                            <td>@result.EnrollmentId</td>
+                            <td>
+                                @if (result.FinishTimeSeconds.HasValue)
+                                {
+                                    @TimeSpan.FromSeconds(
+                                        result.FinishTimeSeconds.Value
+                                    ).ToString(@"hh\:mm\:ss")
+                                }
+                                else
+                                {
+                                    <span>Pending</span>
+                                }
+                            </td>
+                            <td>
+                                @(result.FinishPosition?.ToString() ?? "Pending")
+                            </td>
+                            <td>@result.ResultStatus</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <a href="/Home/ParticipantDashboard"
+       class="btn btn-secondary">
+        Back to Dashboard
+    </a>
+</div>
+

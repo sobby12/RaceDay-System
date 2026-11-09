@@ -1,0 +1,92 @@
+﻿
+@model RaceDay.MVC.Models.EnrolmentViewModel
+
+@{
+    ViewData["Title"] = "Enrol for Event";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Enrol for Event</h3>
+        </div>
+
+        <div class="card-body">
+
+            <h5>@Model.EventName</h5>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            @if (Model.Categories.Any())
+            {
+                <form asp-controller="Enrolments"
+                      asp-action="Create"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden"
+                           asp-for="EventId" />
+
+                    <div class="mb-3">
+                        <label asp-for="CategoryId"
+                               class="form-label">
+                            Select Event Category
+                        </label>
+
+                        <select asp-for="CategoryId"
+                                class="form-select"
+                                required>
+
+                            <option value="">-- Select Category --</option>
+
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.CategoryId">
+                                    @category.CategoryName
+                                    (@category.CategoryType)
+                                </option>
+                            }
+                        </select>
+
+                        <span asp-validation-for="CategoryId"
+                              class="text-danger"></span>
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-success">
+                        Enrol Now
+                    </button>
+
+                    <a asp-controller="Events"
+                       asp-action="Details"
+                       asp-route-id="@Model.EventId"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    No categories are currently available for this event.
+                    Please contact the event organiser.
+                </div>
+
+                <a asp-controller="Events"
+                   asp-action="Details"
+                   asp-route-id="@Model.EventId"
+                   class="btn btn-secondary">
+                    Back to Event
+                </a>
+            }
+
+        </div>
+    </div>
+</div>
+

@@ -413,7 +413,15 @@ Possible improvements include:
 
 These improvements would help make the system more reliable, user-friendly and suitable for a larger number of events and participants.
 
+## GitHub Actions Build Evidence
+
+The screenshot below shows the successful GitHub Actions build for the RaceDay System project.
+
+![Successful GitHub Actions Build](docs/github-actions-success.png)
+
+
 ## 15. Project Demonstration
+
 
 A demonstration video of the RaceDay project is available at:
 

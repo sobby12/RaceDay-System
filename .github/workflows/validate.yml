@@ -1,12 +1,15 @@
+
 name: Validate RaceDay Project
 
 on:
   push:
     branches:
       - main
+      - master
   pull_request:
     branches:
       - main
+      - master
 
 jobs:
   validate:
@@ -15,6 +18,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Check project structure
+        run: |
+          test -d RaceDay.API
+          test -d RaceDay.MVC
+          test -d RaceDay.API.Tests
+          test -d docs
+          test -d .github/workflows
 
       - name: Check required files
         run: |
@@ -28,4 +39,5 @@ jobs:
           test -s docs/RaceDay_Database_Final.sql
 
       - name: Validation successful
-        run: echo "RaceDay project validation completed successfully."
+        run: echo "RaceDay project structure and documentation validated successfully."
+

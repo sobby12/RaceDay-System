@@ -417,7 +417,9 @@ These improvements would help make the system more reliable, user-friendly and s
 
 A demonstration video of the RaceDay project is available at:
 
-https://youtu.be/IO0UysTTx9Q
+Watch the RaceDay System project demonstration here:
+
+[Watch RaceDay System Presentation](https://youtu.be/fH0eoyTcUs8)
 
 ## 16. Conclusion
 

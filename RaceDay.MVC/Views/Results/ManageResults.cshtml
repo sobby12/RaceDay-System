@@ -1,0 +1,61 @@
+﻿
+@model List<RaceDay.MVC.Controllers.MyResultViewModel>
+
+@{
+    ViewData["Title"] = "Manage Results";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Manage Race Results</h2>
+
+        <a asp-controller="Results"
+           asp-action="CreateResult"
+           class="btn btn-success">
+            + Record New Result
+        </a>
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No race results are currently available.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Result ID</th>
+                    <th>Enrolment ID</th>
+                    <th>Finish Position</th>
+                    <th>Finish Time (Seconds)</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var result in Model)
+                {
+                    <tr>
+                        <td>@result.ResultId</td>
+                        <td>@result.EnrollmentId</td>
+                        <td>@result.FinishPosition</td>
+                        <td>@result.FinishTimeSeconds</td>
+                        <td>@result.ResultStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+

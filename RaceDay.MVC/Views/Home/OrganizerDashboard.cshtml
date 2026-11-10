@@ -7,7 +7,7 @@
     <div class="text-center mb-5">
         <h1 class="display-5 fw-bold">Organizer Dashboard</h1>
         <p class="lead">Welcome to the RaceDay Event Management System.</p>
-        <p>Manage your events, categories and participant enrolments.</p>
+        <p>Manage your events, categories, participant enrolments and results.</p>
     </div>
 
     <div class="row g-4">
@@ -49,6 +49,20 @@
                        asp-action="Index"
                        class="btn btn-primary">
                         View Enrolments
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Manage Results</h4>
+                    <p>View participant race results.</p>
+                    <a asp-controller="Results"
+                       asp-action="ManageResults"
+                       class="btn btn-primary">
+                        Manage Results
                     </a>
                 </div>
             </div>
